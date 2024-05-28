@@ -1,5 +1,5 @@
 var siteName = document.getElementById('siteName');
-//var siteURL = document.getElementById('siteURL');
+var siteURL = document.getElementById('siteURL');
 var btnAdd = document.getElementById('btnAdd');
 var btnUpdate = document.getElementById('btnUpdate');
 var deleteBtn = document.getElementById('deleteBtn');
@@ -12,10 +12,32 @@ const deleteAllButton = document.getElementById('deleteAll');
 
 var siteList;
 
+// Get the modal
+var modal = document.getElementById("myModal");
 
-let mood = 'create';
-let tmp;
-if (localStorage.getItem('products') !== null) {
+// Get the button that opens the modal
+var btn = document.getElementById('btnUpdate');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function(){
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function(){
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+if (localStorage.getItem('products') != null) {
   siteList = JSON.parse(localStorage.getItem('products'));
  displaySite();
 }
@@ -26,7 +48,7 @@ if (localStorage.getItem('products') !== null) {
 // create 
 btnAdd.onclick = function(){
   addSite();
-  clearSite();
+  //clearSite();
  displaySite();
   //  let dataLink = url;
 
@@ -52,6 +74,7 @@ function clearSite(){
   siteName.value = '';
   siteURL.value = '';
 }
+
 function displaySite()
 {
   var box = '';
@@ -99,7 +122,7 @@ function displaySite()
   } else {
     btnDelete.innerHTML = '';
   }
-  
+  displaySite();;
 }
 
 //search
